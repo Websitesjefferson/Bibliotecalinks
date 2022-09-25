@@ -1,9 +1,9 @@
 # Bibliotecalinks para salvar links e artigos.
 
-# Tecnologias utilizadas.
+<h1>Tecnologias utilizadas.</h1>
 
-# React-js styled-components context-api localStorage.
-# Node-js jsonwebtoken knex multer sqlite sqlite3. 
+<h4>React-js, styled-components, context-api, localStorage.</h4>
+<h4>Node-js, jsonwebtoken, knex multer, sqlite, sqlite3.</h4> 
 
 
 

@@ -2,7 +2,6 @@ const {hash, compare} = require("bcryptjs")
 const AppErro = require("../utils/AppErro")
 
 const sqliteConnection = require("../database/sqlite")
-const { use } = require("../routes/users.routes")
 
 
 class UsersControllers {

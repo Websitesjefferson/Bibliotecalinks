@@ -43,7 +43,7 @@ export function SingIn(){
 
                 <Input 
                 placeholder="Senha"
-                type="text" 
+                type="password" 
                 icon={FiLock}
                 onChange={e => setPassword(e.target.value)}/>
 

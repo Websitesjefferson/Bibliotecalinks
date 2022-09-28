@@ -16,7 +16,7 @@ import { useEffect } from "react"
 
 
 export function New() {
-    
+
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
@@ -32,38 +32,48 @@ export function New() {
         setLinks(prevState => [...prevState, newLink])
         setNewLink("")
     }
-    function handleRemoveLink(deleted){
+    function handleRemoveLink(deleted) {
         setLinks(prevState => prevState.filter(link => link !== deleted))
 
     }
 
-    function handleAddTags(){
-        setTags( prevState => [...prevState, newTags])
+    function handleAddTags() {
+        setTags(prevState => [...prevState, newTags])
         setNewTags('')
 
     }
-    function handleRemoveTags(deleted){
+    function handleRemoveTags(deleted) {
         setTags(prevState => prevState.filter(tag => tag !== deleted))
 
     }
-  
-    
-     
-         
-        
 
-    async function handleNewNotes(){
 
-    await api.post("/notes", {
-        title,
-        description,
-        tags,
-        links
-     })
-     
 
-     alert('Nota cadastrada com sucesso')
-     navigate(-1)
+
+
+
+    async function handleNewNotes() {
+
+        if(links.length == 0) {
+            return alert("Insira um link")
+        }
+
+        console.log(links, tags)
+
+        if(tags.length == 0) {
+            return alert("Insira uma tag")
+        }
+
+        await api.post("/notes", {
+            title,
+            description,
+            tags,
+            links
+        })
+
+
+        alert('Nota cadastrada com sucesso')
+        navigate(-1)
     }
     return (
         <Container>
@@ -78,22 +88,22 @@ export function New() {
                     </header>
 
 
-                    <Input 
-                    placeholder="Titulo" 
-                    onChange={e => setTitle(e.target.value)}/>
+                    <Input
+                        placeholder="Titulo"
+                        onChange={e => setTitle(e.target.value)} />
 
-                    <Textarea 
-                    placeholder="Observações" 
-                    onChange={e => setDescription(e.target.value)}/>
+                    <Textarea
+                        placeholder="Observações"
+                        onChange={e => setDescription(e.target.value)} />
 
                     <Section title="Links úteis">
                         {
                             links.map((link, index) => (
                                 <NoteItem
-                                  key={String(index)}
-                                  value={link}
-                                  onClick={() => handleRemoveLink(link)}
-                                   />
+                                    key={String(index)}
+                                    value={link}
+                                    onClick={() => handleRemoveLink(link)}
+                                />
 
                             ))
 
@@ -104,36 +114,36 @@ export function New() {
                             value={newLink}
                             onChange={e => setNewLink(e.target.value)}
                             onClick={handleAddLink} />
-                    
+
                     </Section>
 
                     <Section title="Marcadores">
                         <div className="tags">
-                            
-                        { 
-                        tags.map((tag, index) => (
-                            <NoteItem 
-                            key={String(index)}
-                            value={tag} 
-                            onClick={() => handleRemoveTags(tag)}
-                            />
-                            
-                        ))
-                        }
-                            
-                            
-                            <NoteItem 
-                            isNew 
-                            placeholder="Nova tag"
-                            onChange={e => setNewTags(e.target.value)} 
-                            value={newTags}
-                            onClick={handleAddTags}/>
+
+                            {
+                                tags.map((tag, index) => (
+                                    <NoteItem
+                                        key={String(index)}
+                                        value={tag}
+                                        onClick={() => handleRemoveTags(tag)}
+                                    />
+
+                                ))
+                            }
+
+
+                            <NoteItem
+                                isNew
+                                placeholder="Nova tag"
+                                onChange={e => setNewTags(e.target.value)}
+                                value={newTags}
+                                onClick={handleAddTags} />
                         </div>
                     </Section>
 
-                    <Button 
-                    title="Salvar" 
-                    onClick={handleNewNotes}/>
+                    <Button
+                        title="Salvar"
+                        onClick={handleNewNotes} />
                 </Form>
             </main>
         </Container>
